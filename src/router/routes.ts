@@ -41,5 +41,13 @@ export default [
                 }
             },
         ]
-    }
+    },
+    // 英雄战力详情页
+    {
+        path:'/battle',
+        component: () => import('@/views/Battle/index.vue'),
+        meta:{
+            title:'战力查询'
+        }
+    },
 ]
