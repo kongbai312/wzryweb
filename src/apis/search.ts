@@ -20,7 +20,7 @@ export const getHeroListApi = () => {
 
 //英雄战力查询
 export const getHeroBattleInfoApi = ( hero : string , type : 'aqq' | 'awx' | 'iqq' | 'iwx' ) => {
-    return request<any,Data<HeroBattleType[]>>({
+    return request<any,Data<HeroBattleType>>({
         url : baseUrlHero + '/hero/select.php',
         method:'get',
         params:{

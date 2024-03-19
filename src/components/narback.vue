@@ -13,7 +13,7 @@
 import { useRouter } from 'vue-router';
 
     //标题
-    let { title , leftText , rightText = '回到首页'} = defineProps<{
+    let { title , leftText , rightText = '返回首页'} = defineProps<{
         title? : string,
         leftText? : string,
         rightText? : string

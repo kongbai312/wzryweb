@@ -20,6 +20,7 @@
     "sass": "^1.72.0",
     "vant": "^4.8.6",
     "vue": "^3.4.15",
+    "vue-clipboard3": "^2.0.0",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {

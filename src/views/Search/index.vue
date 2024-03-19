@@ -47,7 +47,7 @@
 
 <script setup lang='ts'>
 import type { HeroType } from '@/types/hero';
-import { getHeroListApi , getHeroBattleInfoApi } from '@/apis/search';
+import { getHeroListApi } from '@/apis/search';
 import { message } from '@/utils/vantTool';
 import PopupBottom from './popupBottom.vue'
 import { useHeroStore } from '@/stores';
@@ -81,6 +81,7 @@ const getHeroList = async () => {
     heroList.value = result.data
     //赋值给筛选列表
     heroListTab.value = result.data
+    //加载完成
     loading.value = false
   }
   else {
@@ -135,10 +136,6 @@ const heroClick = ( name : string ) => {
   heroStore.setHeroName(name)
 }
 
-//获取英雄战力
-const getHeroBattleInfo = async() => {
-  let result = await getHeroBattleInfoApi('元歌','aqq')
-}
 </script>
 
 <style lang="scss" scoped>
@@ -219,6 +216,7 @@ const getHeroBattleInfo = async() => {
 
   //标签栏
   .heroList {
+    box-sizing: border-box;
     padding: 10px;
     display: grid;
     grid-template-columns: repeat(auto-fill, 60px);
