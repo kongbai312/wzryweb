@@ -142,6 +142,7 @@ const getHeroBattleInfo = async() => {
 </script>
 
 <style lang="scss" scoped>
+@import '../../styles/mixins.scss';
 // 边框动画
 @keyframes animatedgradient {
   0% {
@@ -228,6 +229,10 @@ const getHeroBattleInfo = async() => {
       position: relative;
       width: 60px;
       height: 60px;
+      &::after{
+        border-radius: 10px;
+        @include bg-after;
+      }
 
       .heroImg {
         width: 100%;
