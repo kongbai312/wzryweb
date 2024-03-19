@@ -14,10 +14,12 @@
       <van-cell title="切换主题" :icon="theme === 'light' ? 'eye-o' : 'closed-eye'" is-link @click="changeTheme"></van-cell>
       <van-cell title="清除缓存" icon="stop-circle-o" is-link></van-cell>
       <van-cell title="关于我" icon="info-o" is-link></van-cell>
-      <van-cell title="分享给朋友" icon="share-o" is-link></van-cell>
+      <van-cell title="分享给朋友" icon="share-o" is-link @click="onShowShare(true)"></van-cell>
     </div>
   </div>
 
+  <!-- 分享组件 -->
+  <Showshare :showShare="showShare" @onShowShare="onShowShare"></Showshare>
 </template>
 
 <script setup lang='ts'>
@@ -32,6 +34,13 @@ const { changeTheme } = normalStore
 let theme = computed(() => {
   return normalStore.theme
 })
+
+//是否显示分享组件
+let showShare = ref(false)
+//控制分享组件开启关闭
+let onShowShare = ( boolean : boolean) => {
+  showShare.value = boolean
+}
 </script>
 
 <style lang="scss" scoped>

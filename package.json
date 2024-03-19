@@ -13,10 +13,12 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@chenfengyuan/vue-qrcode": "2",
     "axios": "^1.6.8",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
+    "qrcode": "1",
     "sass": "^1.72.0",
     "vant": "^4.8.6",
     "vue": "^3.4.15",
