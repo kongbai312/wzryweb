@@ -1,1 +1,0 @@
-import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{o,z as r}from"./index-U7dfd7Xi.js";const c={};function n(t,s){return o(),r("div",null,"工具页")}const f=e(c,[["render",n]]);export{f as default};

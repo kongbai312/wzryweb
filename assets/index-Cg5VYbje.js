@@ -1,0 +1,1 @@
+import{_ as e}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{o,z as c}from"./index-CnghQ47d.js";const t={},s={class:"homeBox"};function r(_,a){return o(),c("div",s,"Home")}const f=e(t,[["render",r],["__scopeId","data-v-fe88dda9"]]);export{f as default};
