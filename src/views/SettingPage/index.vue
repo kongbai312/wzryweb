@@ -149,7 +149,7 @@ let onShowShare = ( boolean : boolean) => {
   display: flex;
   justify-content: center;
   &::after{
-    border-radius: 30px;
+    border-radius: 16px;
     @include bg-after;
   }
 }
