@@ -16,11 +16,18 @@ export const useHeroStore = defineStore('xx-hero',() => {
         regionValue.value = region
     }
 
+    //清空缓存
+    const clearHeroAndRegion = () => {
+        heroName.value = ''
+        regionValue.value = ''
+    }
+
     return{
         heroName,
         regionValue,
         setHeroName,
-        setRegionValue
+        setRegionValue,
+        clearHeroAndRegion
     }
 },
     { 

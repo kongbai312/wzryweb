@@ -12,6 +12,8 @@ import '@/styles/dark.scss';
 
 // Toast
 import 'vant/es/toast/style';        
+//Dialog
+import 'vant/es/dialog/style';
 
 //导入自己封装的组件库
 import WzryUI from '@/components/library/index';
