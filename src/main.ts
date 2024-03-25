@@ -18,6 +18,9 @@ import 'vant/es/dialog/style';
 //导入自己封装的组件库
 import WzryUI from '@/components/library/index';
 
+// 注册图标
+import 'virtual:svg-icons-register';
+
 const app = createApp(App)
 
 app.use(pinia)

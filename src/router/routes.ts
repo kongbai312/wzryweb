@@ -50,4 +50,12 @@ export default [
             title:'战力查询'
         }
     },
+    // 随机数
+    {
+        path:'/random',
+        component: () => import('@/views/ToolPage/randomNum.vue'),
+        meta:{
+            title:'随机数'
+        }
+    },
 ]

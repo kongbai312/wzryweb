@@ -6,7 +6,7 @@
         <span class="title">{{ tools.title }}</span>
       </div>
       <div class="tools">
-        <div class="toolItem" v-for="(tool, index) in tools.tools" :key="index">
+        <div class="toolItem" v-for="(tool, index) in tools.tools" :key="index" @click="goRoute(tool.route)">
           <van-icon :name="tool.iconName" :color="tool.iconColor" />
           <div class="toolItem_right">
             <span class="title">{{ tool.title }}</span>
@@ -19,6 +19,8 @@
 </template>
 
 <script setup lang='ts'>
+import { useRouter } from 'vue-router';
+
 // 工具箱列表
 const toolsList = [
   {
@@ -30,17 +32,27 @@ const toolsList = [
         iconName: 'send-gift-o',
         iconColor: '#F6648C',
         title: '贴吧工具箱',
-        describe: '贴吧用户搜索，贴吧关注'
+        describe: '贴吧用户搜索，贴吧关注',
+        route:''
       },
       {
         iconName: 'point-gift',
         iconColor: '#F6648C',
         title: '随机数',
-        describe: '常用于抽签，抽奖'
+        describe: '常用于抽签，抽奖',
+        route:'random'
       }
     ]
   }
 ]
+
+//引入router
+const router = useRouter()
+//跳转到工具
+const goRoute = ( route : string ) => {
+  console.log(route)
+  router.push(route)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -51,6 +63,7 @@ const toolsList = [
   padding: 0 15px 20px 15px;
   &::after {
     @include bg-after;
+    z-index: -1;
   }
 
   .toolsItem {
