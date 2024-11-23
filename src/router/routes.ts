@@ -58,4 +58,12 @@ export default [
             title:'随机数'
         }
     },
+    // 荒野乱斗地图
+    {
+        path:'/bsmap',
+        component: () => import('@/views/ToolPage/bsMap/index.vue'),
+        meta:{
+            title:'荒野乱斗地图工具'
+        }
+    },
 ]

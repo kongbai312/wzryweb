@@ -1,0 +1,156 @@
+<template>
+    <div class="bsMapSetting_container">
+        <!-- 下拉菜单 -->
+        <div class="dropdown_container">
+            <van-dropdown-menu>
+                <van-dropdown-item v-model="mode" :options="modeOption" />
+            </van-dropdown-menu>
+            <van-button class="save_button" type="success" @click="saveButtonFun">保存</van-button>
+        </div>
+        <!-- 地图组 -->
+        <van-checkbox-group class="mapGroup" v-model="mapChecked">
+            <van-swipe-cell class="mapsItem" v-for="(map,index) in currentModeMaps" :key="index">
+                <van-checkbox class="mapItem" :name="map">{{map}}</van-checkbox>
+                <template #right>
+                    <van-button square text="删除" type="danger" class="delete-button" />
+                </template>
+            </van-swipe-cell>
+        </van-checkbox-group>
+    </div>
+</template>
+
+<script setup lang='ts'>
+import { useBsMapsStore } from '@/stores/modules/bsMaps';
+import type { MapsJsonType } from '@/types/bsMaps.d.ts';
+import { message } from '@/utils/vantTool';
+//模式总类
+let modeOption = ref([
+    { text: '宝石', value: 'bs' },
+    { text: '金库', value: 'jk' },
+    { text: '赏金', value: 'sj' },
+    { text: '淘汰', value: 'tt' },
+    { text: '热区', value: 'rq' },
+    { text: '足球', value: 'zq' },
+])
+//当前选择模式
+let mode = ref<string>('bs')
+
+//地图数据
+const mapsJson : Record<string, MapsJsonType> = {
+    'bs' :{   
+        name:'bs',
+        value:['硬石矿井','宝石要塞','十面埋伏','嗖嗖作响','矿车飞驰','锋利锐角','乡趣游乐场','开阔地带','终点站','隐秘潜行','菠萝广场','螺旋开瓶']
+    },
+    'jk' :{
+        name:'jk',
+        value:['轰隆峡谷','安全区域','烫手山芋','遥远的桥','神秘领域','电子风暴']
+    },
+    'sj' :{
+        name:'sj',
+        value:['蝮蛇草场','神秘流星','大运河','格格不入','夹心蛋糕','酷热地带']
+    },
+    'tt' :{
+        name:'tt',
+        value:['金臂峡谷','摇滚贝尔','烈焰凤凰','空旷荒野','新地平线','川流不息','四重关卡','暮光通道','强硬路线','跳跃岛屿','黄昏搏斗','深切感激']
+    },
+    'rq' :{
+        name:'rq',
+        value:['开门营业','平行游戏','灼热火圈','甲虫决斗','全力冲刺','日出日落']
+    },
+    'zq' :{
+        name:'zq',
+        value:['后院球场','三重威胁','绿荫球场','超级海滩','梦幻弹珠','中心舞台','沙滩足球','阳光球场','点球大战','裤子后袋','乏力双脚','炫酷花招']
+    }
+}
+
+//当前选择模式的全部地图
+let currentModeMaps = computed(() => {
+    return mapsJson[mode.value].value
+})
+
+//引入store
+const bsMapsStore = useBsMapsStore()
+//总抽取地图
+let mapsChecked = computed(() => {
+    return bsMapsStore.bsMaps
+})
+
+//当前模式选择地图
+let mapChecked = ref<string[]>([])
+//初始赋值
+mapChecked.value = mapsChecked.value[mode.value].map
+
+//监听模式发生变化
+watch(() => mode.value ,(newVal,oldVal) => {
+    //将上一个模式选择的地图保存
+    mapsChecked.value[oldVal].map = mapChecked.value
+    //赋值新模式保存的地图
+    mapChecked.value = mapsChecked.value[newVal].map
+})
+
+//单模式最小地图选择数量
+const minModeMap = 1
+
+//监听选择地图数量
+watch(() => mapChecked.value ,(newVal,oldVal) => {
+    if(newVal.length < minModeMap){
+        message.info('地图最小选择数量为1')
+        //并且恢复刚刚的修改
+        mapChecked.value = oldVal
+    }
+})
+
+//保存按钮
+const saveButtonFun = () => {
+    //将当前模式地图进行保存，其余的切换模式会自动保存
+    mapsChecked.value[mode.value].map = mapChecked.value
+    //保存提示
+    message.success('保存成功')
+}
+
+</script>
+
+<style lang="scss" scoped>
+.bsMapSetting_container {
+    margin-top: -10px;
+    width: 100vw;
+    .dropdown_container{
+        box-sizing: border-box;
+        padding: 2px 0;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        .van-dropdown-menu{
+            width: 80%;
+            height: 100%;
+            ::v-deep(.van-dropdown-menu__bar){
+                height: 100%;
+            }
+        }
+        .save_button {
+            margin-left: 10px;
+            height: 100%;
+        }
+    }
+
+    .mapGroup {
+        box-sizing: border-box;
+        padding: 0 10px;
+
+        .mapsItem {
+            height: 50px;
+
+            .mapItem {
+                height: 50px;
+            }
+
+            // 删除按钮
+            ::v-deep(.van-swipe-cell__wrapper) {
+                .delete-button {
+                    height: 100%;
+                }
+            }
+        }
+    }
+}
+</style>

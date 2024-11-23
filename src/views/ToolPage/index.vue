@@ -41,6 +41,13 @@ const toolsList = [
         title: '随机数',
         describe: '常用于抽签，抽奖',
         route:'random'
+      },
+      {
+        iconName: 'medal',
+        iconColor: '#F6648C',
+        title: 'BS地图',
+        describe: '用于荒野乱斗地图抽取',
+        route:'bsmap'
       }
     ]
   }
