@@ -116,10 +116,11 @@ const saveButtonFun = () => {
     width: 100vw;
     .dropdown_container{
         box-sizing: border-box;
-        padding: 2px 0;
+        padding: 2px 10px;
         height: 50px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         .van-dropdown-menu{
             width: 80%;
             height: 100%;
@@ -128,6 +129,8 @@ const saveButtonFun = () => {
             }
         }
         .save_button {
+            padding: 5px;
+            width: 15%;
             margin-left: 10px;
             height: 100%;
         }
@@ -148,6 +151,69 @@ const saveButtonFun = () => {
             ::v-deep(.van-swipe-cell__wrapper) {
                 .delete-button {
                     height: 100%;
+                }
+            }
+        }
+    }
+}
+/* 这里写大于 768px 屏幕时应用的样式 */
+@media (min-width: 768px) {
+    .dropdown_container{
+        ::v-deep{
+            .van-dropdown-menu__item{
+                .van-dropdown-menu__title{
+                    &::after{
+                        border-width: 6px;
+                        right: -12px;
+                        margin-top: -10px;
+                    }
+                    .van-ellipsis{
+                        height: 40px;
+                        line-height: 40px;
+                        font-size: 26px;
+                    }
+                }
+                
+            }
+
+            .save_button{
+                border-radius: 6px;
+                font-size: 10px;
+            }
+        }   
+    }
+    .mapGroup {
+        
+
+        .mapsItem {
+
+            .mapItem {
+                font-size: 12px;
+                ::v-deep(){
+                    .van-checkbox__icon--checked{
+                        height: 30px;
+                        line-height: 30px;
+                        width: 30px;
+                        .van-icon-success{
+                            height: 30px;
+                            width: 30px;
+                            &::before{
+                                font-size: 18px;
+                                line-height: 30px;
+                            }
+                        }
+                    }
+                    .van-checkbox__label{
+                        height: 30px;
+                        line-height: 30px;
+                    }
+                }
+            }
+
+            // 删除按钮
+            ::v-deep() {
+                .van-swipe-cell__right{
+                    right: -1px;
                 }
             }
         }

@@ -25,8 +25,9 @@
         </div>
     </div>
     <!-- 地图展示 -->
-    <div class="mapShow" v-if="mapsPractical.length !==0">
-        <span class="mapItem" v-for="(map , index) in mapsPractical" :key="index">{{modeChineseFun(map.mode)}}{{map.value}}</span>
+    <div class="mapShow" v-if="mapsPractical.length !== 0">
+        <span class="mapItem" v-for="(map, index) in mapsPractical"
+            :key="index">{{ modeChineseFun(map.mode) }}{{ map.value }}</span>
     </div>
 </template>
 
@@ -89,10 +90,10 @@ let mapsChecked = computed(() => {
 })
 
 //实际抽取的地图
-let mapsPractical = ref<{mode:string,value:string}[]>([])
+let mapsPractical = ref<{ mode: string, value: string }[]>([])
 
 //从数组内随机抽取X个元素
-function getRandomByArr<T>(count : number , arr : T[]) : T[] {
+function getRandomByArr<T>(count: number, arr: T[]): T[] {
     //返回结果
     const result: T[] = [];
     //set函数用于防止重复抽取
@@ -112,78 +113,78 @@ function getRandomByArr<T>(count : number , arr : T[]) : T[] {
 //抽取函数
 const mapRandomFun = () => {
     //总地图
-    let maps : Record<string,string[]> = {}
+    let maps: Record<string, string[]> = {}
     //根据选择的模式，提取对应的地图
-    modeChecked.value.forEach( mode => {
+    modeChecked.value.forEach(mode => {
         maps[mode] = mapsChecked.value[mode].map
     })
     //抽取地图数量
     let mapCountValue = mapCount.value
     //当抽取地图数量 小于 模式的数量
-    if(mapCountValue < modeChecked.value.length){
+    if (mapCountValue < modeChecked.value.length) {
         //先决定抽取哪些模式
-        let modeArr : string[] = getRandomByArr<string>(mapCountValue,modeChecked.value)
+        let modeArr: string[] = getRandomByArr<string>(mapCountValue, modeChecked.value)
         //再在每个模式抽取一个地图
-        mapsPractical.value = modeArr.map( mode => {
+        mapsPractical.value = modeArr.map(mode => {
             return {
-                mode : mode,
-                value : getRandomByArr(1,maps[mode])[0]
+                mode: mode,
+                value: getRandomByArr(1, maps[mode])[0]
             }
         })
     }
     //当抽取地图数量 等于 模式的数量
-    else if(mapCountValue === modeChecked.value.length){
+    else if (mapCountValue === modeChecked.value.length) {
         //每个模式抽取一个地图
-        mapsPractical.value = modeChecked.value.map( mode => {
+        mapsPractical.value = modeChecked.value.map(mode => {
             return {
-                mode : mode,
-                value : getRandomByArr(1,maps[mode])[0]
+                mode: mode,
+                value: getRandomByArr(1, maps[mode])[0]
             }
         })
     }
     //当抽取地图数量 等于 模式的数量
-    else if( mapCountValue > modeChecked.value.length){
+    else if (mapCountValue > modeChecked.value.length) {
         //已选取模式的地图总数量
-        let mapsTotal = modeChecked.value.reduce((prev , mode) => {
+        let mapsTotal = modeChecked.value.reduce((prev, mode) => {
             prev = prev + mapsChecked.value[mode].map.length
             return prev
-        },0)
+        }, 0)
         //先判断抽取的数量大不大于配置地图的数量，如宝石模式抽5张地图，但只配置了三张
-        if(mapCountValue > mapsTotal){
+        if (mapCountValue > mapsTotal) {
             message.fail('抽取错误，原因：配置地图的数量少于抽取数量')
             return
         }
         //除抽取了的地图以外的其他地图
-        let otherMapsArr : {mode:string,value:string}[] = []
+        let otherMapsArr: { mode: string, value: string }[] = []
         //先抽取与模式数量相同的地图
-        let modeMap = modeChecked.value.map( mode => {
+        let modeMap = modeChecked.value.map(mode => {
             //抽取出的地图
-            let finishMap = getRandomByArr(1,maps[mode])[0]
+            let finishMap = getRandomByArr(1, maps[mode])[0]
             //将该模式的其他地图添加到其他地图组
-            maps[mode].forEach( map => {
-                if(map !== finishMap){
+            maps[mode].forEach(map => {
+                if (map !== finishMap) {
                     otherMapsArr.push({
-                        mode : mode,
-                        value : map
+                        mode: mode,
+                        value: map
                     })
                 }
             })
             return {
-                mode : mode,
-                value : finishMap
+                mode: mode,
+                value: finishMap
             }
         })
         //需要抽取的地图数量
         let needOtherMapCount = mapCountValue - modeChecked.value.length
         //再抽其他地图数组中抽取剩下的地图
-        let otherMap = getRandomByArr<{mode:string,value:string}>(needOtherMapCount,otherMapsArr)
+        let otherMap = getRandomByArr<{ mode: string, value: string }>(needOtherMapCount, otherMapsArr)
         //再放入最终抽取结果
-        mapsPractical.value = [...modeMap,...otherMap]
+        mapsPractical.value = [...modeMap, ...otherMap]
     }
 }
 
 //地图抽取
-const mapRandomClick = async() => {
+const mapRandomClick = async () => {
     if (isRandomMap.value) {
         message.info('当前正在抽取')
         return
@@ -204,7 +205,7 @@ const mapRandomClick = async() => {
 
 //模式转中文函数
 const modeChineseFun = (mode: string) => {
-    const modeMap : Record<string, string> = {
+    const modeMap: Record<string, string> = {
         'bs': '宝石：',
         'jk': '金库：',
         'rq': '热区：',
@@ -239,6 +240,7 @@ const modeChineseFun = (mode: string) => {
 
         .modeItem {
             font-size: 20px;
+
         }
     }
 
@@ -271,6 +273,7 @@ const modeChineseFun = (mode: string) => {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     .mapItem {
         width: 100%;
         text-align: center;
@@ -282,6 +285,80 @@ const modeChineseFun = (mode: string) => {
 
         &:last-child {
             border-bottom: 1px solid #999;
+        }
+    }
+}
+
+/* 这里写大于 768px 屏幕时应用的样式 */
+@media (min-width: 768px) {
+
+    .mode {
+        .modeGroup {
+            .modeItem {
+                height: 40px;
+
+                ::v-deep() {
+                    .van-checkbox__icon {
+                        height: 40px;
+
+                        .van-badge__wrapper {
+                            height: 40px;
+                            width: 40px;
+                            line-height: 40px;
+
+                            &::before {
+                                height: 40px;
+                                width: 40px;
+                                line-height: 40px;
+                                font-size: 20px
+                            }
+                        }
+                    }
+
+                    .van-checkbox__label {
+                        height: 30px;
+                        line-height: 30px;
+                    }
+                }
+            }
+        }
+        .buttonGroup{
+            height: 30px;
+            .van-button {
+                height: 100%;
+                width: 100px;
+                font-size: 22px;
+            }
+        }
+        .randomButton_container{
+            font-size: 18px;
+            ::v-deep(){
+                .van-stepper{
+                    .van-stepper__minus, .van-stepper__plus{
+                        width: 40px;
+                        height: 40px;
+                        line-height: 40px;
+                    }
+                    input{
+                        width: 42px;
+                        height: 38px;
+                        line-height: 38px;
+                        font-size: 20px;
+                    }
+                }
+                
+            }
+            .randomButton{
+                width: 70px;
+                height: 70px;
+                font-size: 16px;
+            }
+        }
+
+        .percentage_container{
+            .van-progress{
+                height: 10px;
+            }
         }
     }
 }
