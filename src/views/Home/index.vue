@@ -82,7 +82,8 @@ const getWeather = async () => {
   if (result.success === true) {
     weather.value = result.data
     air.value = result.air
-    announcement.value = result.tip as string
+    // announcement.value = result.tip as string
+    announcement.value = `当前位于：${result.city}`
   }
 }
 onMounted(() => {

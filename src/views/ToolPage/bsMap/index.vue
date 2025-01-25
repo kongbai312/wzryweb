@@ -2,7 +2,7 @@
   <!-- 返回导航 -->
   <Narback></Narback>
   <!-- 随机地图 -->
-  <div class="bs_container">
+  <div class="bs_container bs_container_size">
     <BsMap v-if="activePage === 'home'"></BsMap>
     <BsMapSetting v-else></BsMapSetting>
   </div>
@@ -22,8 +22,10 @@ let activePage = ref('home')
 </script>
 
 <style lang="scss" scoped>
-.bs_container {
+.bs_container_size{
   height: calc(100vh - 46px - 50px);
+}
+.bs_container {
   box-sizing: border-box;
   padding: 10px;
   display: flex;
@@ -32,4 +34,5 @@ let activePage = ref('home')
   overflow-x: hidden;
   overflow-y: scroll;
 }
+
 </style>

@@ -62,9 +62,13 @@ let isRandomMap = ref(false)
 const percentageFun = async () => {
     // 重置进度条
     percentage.value = 0;
+    
+    // 延迟 500 毫秒，模拟动画效果，让进度条从0开始 这段代码后面加的，添加时间：2025/1/21 18：44
+    await new Promise(resolve => setTimeout(resolve, 500));
 
     // 模拟进度条更新的异步循环
     while (percentage.value < 100) {
+        
         // 每次随机增加 1-10 之间的进度
         const randomIncrease = Math.floor(Math.random() * 10) + 1;
         percentage.value += randomIncrease;
@@ -290,7 +294,7 @@ const modeChineseFun = (mode: string) => {
 }
 
 /* 这里写大于 768px 屏幕时应用的样式 */
-@media (min-width: 768px) {
+@media (min-width: 600px) {
 
     .mode {
         .modeGroup {
