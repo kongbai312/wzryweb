@@ -159,7 +159,7 @@ const changeCurrentHotData = () => {
 
 //跳转到目标页面
 const goClick = ( hotItem : HotType ) => {
-  window.open(hotItem.mobileUrl!, '_blank')
+  window.open(hotItem.url!, '_blank')
 }
 
 </script>

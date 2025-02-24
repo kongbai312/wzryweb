@@ -48,7 +48,14 @@ const toolsList = [
         title: 'BS地图',
         describe: '用于荒野乱斗地图抽取',
         route:'bsmap'
-      }
+      },
+      {
+        iconName: 'send-gift-o',
+        iconColor: '#F6648C',
+        title: '抖音工具箱',
+        describe: '搜索抖音历史发言，实名认证',
+        route:'dytool'
+      },
     ]
   }
 ]

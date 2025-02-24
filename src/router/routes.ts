@@ -66,4 +66,12 @@ export default [
             title:'荒野乱斗地图工具'
         }
     },
+    //抖音工具箱
+    {
+        path:'/dytool',
+        component: () => import('@/views/ToolPage/dytool.vue'),
+        meta:{
+            title:'抖音工具'
+        }
+    },
 ]
