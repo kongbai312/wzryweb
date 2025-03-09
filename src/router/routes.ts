@@ -74,4 +74,20 @@ export default [
             title:'抖音工具'
         }
     },
+    //个人所得税
+    {
+        path:'/gsapp',
+        component: () => import('@/views/ToolPage/gsApp/index.vue'),
+        meta:{
+            title:'个税计算'
+        }
+    },
+    //个人所得税详情页
+    {
+        path:'/gsdetail',
+        component: () => import('@/views/ToolPage/gsApp/gsDetail.vue'),
+        meta:{
+            title:'个税详情'
+        }
+    },
 ]

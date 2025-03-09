@@ -50,11 +50,18 @@ const toolsList = [
         route:'bsmap'
       },
       {
-        iconName: 'send-gift-o',
+        iconName: 'music',
         iconColor: '#F6648C',
         title: '抖音工具箱',
         describe: '搜索抖音历史发言，实名认证',
         route:'dytool'
+      },
+      {
+        iconName: 'gold-coin',
+        iconColor: '#F6648C',
+        title: '个税',
+        describe: '计算个人所得税务',
+        route:'gsdetail'
       },
     ]
   }
