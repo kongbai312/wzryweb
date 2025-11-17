@@ -34,4 +34,4 @@ import { useRouter } from 'vue-router';
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped></style>

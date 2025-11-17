@@ -113,7 +113,7 @@ const close = () => {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .codeBox{
     display: flex;
     justify-content: center;
