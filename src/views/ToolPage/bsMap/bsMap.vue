@@ -26,8 +26,8 @@
     </div>
     <!-- 地图展示 -->
     <div class="mapShow" v-if="mapsPractical.length !== 0">
-        <span class="mapItem" v-for="(map, index) in mapsPractical"
-            :key="index">{{ modeChineseFun(map.mode) }}{{ map.value }}</span>
+        <span class="mapItem" v-for="(map, index) in mapsPractical" :key="index">{{ modeChineseFun(map.mode) }}{{
+            map.value }}</span>
     </div>
 </template>
 
@@ -62,13 +62,13 @@ let isRandomMap = ref(false)
 const percentageFun = async () => {
     // 重置进度条
     percentage.value = 0;
-    
+
     // 延迟 500 毫秒，模拟动画效果，让进度条从0开始 这段代码后面加的，添加时间：2025/1/21 18：44
     await new Promise(resolve => setTimeout(resolve, 500));
 
     // 模拟进度条更新的异步循环
     while (percentage.value < 100) {
-        
+
         // 每次随机增加 1-10 之间的进度
         const randomIncrease = Math.floor(Math.random() * 10) + 1;
         percentage.value += randomIncrease;
@@ -301,66 +301,69 @@ const modeChineseFun = (mode: string) => {
             .modeItem {
                 height: 40px;
 
-                ::v-deep() {
-                    .van-checkbox__icon {
-                        height: 40px;
+                :deep(.van-checkbox__label) {
+                    height: 30px;
+                    line-height: 30px;
+                }
 
-                        .van-badge__wrapper {
+                :deep(.van-checkbox__icon) {
+                    height: 40px;
+
+                    .van-badge__wrapper {
+                        height: 40px;
+                        width: 40px;
+                        line-height: 40px;
+
+                        &::before {
                             height: 40px;
                             width: 40px;
                             line-height: 40px;
-
-                            &::before {
-                                height: 40px;
-                                width: 40px;
-                                line-height: 40px;
-                                font-size: 20px
-                            }
+                            font-size: 20px
                         }
-                    }
-
-                    .van-checkbox__label {
-                        height: 30px;
-                        line-height: 30px;
                     }
                 }
             }
         }
-        .buttonGroup{
+
+        .buttonGroup {
             height: 30px;
+
             .van-button {
                 height: 100%;
                 width: 100px;
                 font-size: 22px;
             }
         }
-        .randomButton_container{
+
+        .randomButton_container {
             font-size: 18px;
-            ::v-deep(){
-                .van-stepper{
-                    .van-stepper__minus, .van-stepper__plus{
-                        width: 40px;
-                        height: 40px;
-                        line-height: 40px;
-                    }
-                    input{
-                        width: 42px;
-                        height: 38px;
-                        line-height: 38px;
-                        font-size: 20px;
-                    }
+
+            :deep(.van-stepper) {
+
+                .van-stepper__minus,
+                .van-stepper__plus {
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
                 }
-                
+
+                input {
+                    width: 42px;
+                    height: 38px;
+                    line-height: 38px;
+                    font-size: 20px;
+                }
             }
-            .randomButton{
+
+            .randomButton {
                 width: 70px;
                 height: 70px;
                 font-size: 16px;
             }
         }
 
-        .percentage_container{
-            .van-progress{
+        .percentage_container {
+            .van-progress {
                 height: 10px;
             }
         }
