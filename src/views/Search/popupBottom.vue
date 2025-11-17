@@ -5,8 +5,8 @@
             <div class="popupBottom">
                 <div class="title">当前查询【{{heroName}}】，请选择系统</div>
                 <div class="buttomBox">
-                    <van-button round :type="item.type" class="buttomItem" 
-                    v-for="(item, index) in buttomInfo":key="index"
+                    <van-button round :type="item.type as any" class="buttomItem" 
+                    v-for="(item, index) in buttomInfo" :key="index"
                     @click="goHeroBattleInfo(item.value)"
                     >{{ item.name }}</van-button>
                 </div>
@@ -78,7 +78,7 @@ const goHeroBattleInfo = ( region : string ) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 // 底部弹窗
 .popupBottom {
     box-sizing: border-box;

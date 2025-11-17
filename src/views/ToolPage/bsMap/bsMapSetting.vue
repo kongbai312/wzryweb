@@ -116,7 +116,7 @@ const saveButtonFun = () => {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .bsMapSetting_container {
     margin-top: -10px;
     width: 100vw;

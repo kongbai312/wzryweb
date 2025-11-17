@@ -221,7 +221,7 @@ const modeChineseFun = (mode: string) => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .title {
     font-size: 28px;
     margin: 15px 0;

@@ -21,7 +21,7 @@ import BsMapSetting from './bsMapSetting.vue';
 let activePage = ref('home')
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .bs_container_size{
   height: calc(100vh - 46px - 50px);
 }

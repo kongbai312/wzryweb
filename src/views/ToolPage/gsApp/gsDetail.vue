@@ -106,7 +106,7 @@ const imgClick = () => {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .gsDetail_container {
     height: 100vh;
     width: 100vw;

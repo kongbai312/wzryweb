@@ -90,8 +90,8 @@ onMounted(() => {
 })
 </script>
 
-<style lang="scss" scoped>
-@import '../../styles/mixins.scss';
+<style lang="less" scoped>
+@import '../../styles/mixins.less';
 
 .battleContainer {
   box-sizing: border-box;
@@ -108,7 +108,7 @@ onMounted(() => {
 
     &::after {
       border-radius: 10px;
-      @include bg-after;
+      .bg-after();
     }
 
     .hero_img {

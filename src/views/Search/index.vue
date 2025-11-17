@@ -138,8 +138,8 @@ const heroClick = ( name : string ) => {
 
 </script>
 
-<style lang="scss" scoped>
-@import '../../styles/mixins.scss';
+<style lang="less" scoped>
+@import '../../styles/mixins.less';
 // 边框动画
 @keyframes animatedgradient {
   0% {
@@ -229,7 +229,7 @@ const heroClick = ( name : string ) => {
       height: 60px;
       &::after{
         border-radius: 10px;
-        @include bg-after;
+        .bg-after();
       }
 
       .heroImg {

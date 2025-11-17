@@ -50,7 +50,7 @@ const { heroBattleInfo , loading = false} = defineProps<{
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 //骨架屏
 .van-skeleton {
     padding: 0;

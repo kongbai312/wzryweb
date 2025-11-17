@@ -27,7 +27,7 @@
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .gsapp_container{
     height: 100vh;
     width: 100vw;

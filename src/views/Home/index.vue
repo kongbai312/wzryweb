@@ -12,15 +12,15 @@
       </div>
       <div class="weather_Item">
         <span class="title">空气质量</span>
-        <span class="text">{{ air?.aqi_name }}</span>
+        <span class="text">{{ air?.aqi_name || '-'}}</span>
       </div>
       <div class="weather_Item">
         <span class="title">最低气温</span>
-        <span class="text">{{ weather?.low }}</span>
+        <span class="text">{{ weather?.low || '-' }}</span>
       </div>
       <div class="weather_Item">
         <span class="title">最高气温</span>
-        <span class="text">{{ weather?.high }}</span>
+        <span class="text">{{ weather?.high || '-' }}</span>
       </div>
     </div>
     <!-- 热搜 -->
@@ -50,7 +50,7 @@
         </div>
       </div>
       <!-- 热搜数据 -->
-      <van-cell-group>
+      <van-cell-group v-if="showHotData.length > 0">
         <van-cell v-for="(item) in showHotData" :key="item.index" :title="item.title"
           title-class="cellItem_titleBox"  @click="goClick(item)"> 
           <template #title>
@@ -62,6 +62,7 @@
           </template>
         </van-cell>
       </van-cell-group>
+      <van-empty v-else description="暂无数据" />
     </div>
   </div>
 </template>
@@ -78,12 +79,15 @@ let weather = ref<WeatherType>()
 let air = ref<AirType>()
 //获取当前天气
 const getWeather = async () => {
-  let result = await getWeatherApi()
-  if (result.success === true) {
-    weather.value = result.data
-    air.value = result.air
-    // announcement.value = result.tip as string
-    announcement.value = `当前位于：${result.city}`
+  try {
+    let result = await getWeatherApi()
+    if (result.success === true) {
+      weather.value = result.data
+      air.value = result.air
+      announcement.value = `当前位于：${result.city}`
+    }
+  } catch (err) {
+    console.log('err:getWeather',err)
   }
 }
 onMounted(() => {
@@ -116,14 +120,18 @@ const menuOpenClose = () => {
 let hotData = ref<HotType[]>()
 //获取数据热搜
 const getHot = async (type : string) => {
-  let result = await getHotApi(type)
-  hotData.value = result.data?.map(item => ({
-    index : item.index,
-    hot : item.hot,
-    mobileUrl : item.mobilUrl,
-    url : item.url,
-    title : item.title
-  })) as any
+  try {
+    let result = await getHotApi(type)
+    hotData.value = result.data?.map(item => ({
+      index : item.index,
+      hot : item.hot,
+      mobileUrl : item.mobilUrl,
+      url : item.url,
+      title : item.title
+    })) as any
+  } catch (err) {
+    console.log('err:getHot',err)
+  }
 }
 onMounted(() => {
   getHot(option[menuActive.value].name)
@@ -135,7 +143,7 @@ let hotDataIndex = ref(0)
 let showHotData = computed(() => {
   let startIndex = hotDataIndex.value * 10
   let endIndex = startIndex + 10
-  return hotData.value?.slice(startIndex , endIndex)
+  return hotData.value?.slice(startIndex , endIndex) || []
 })
 //是否旋转
 let isRotate = ref(false)
@@ -164,8 +172,8 @@ const goClick = ( hotItem : HotType ) => {
 
 </script>
 
-<style lang="scss" scoped>
-@import '../../styles/mixins.scss';
+<style lang="less" scoped>
+@import '../../styles/mixins.less';
 @keyframes rotateAnimation {
   0% {
     transform: rotate(0deg);
@@ -185,7 +193,7 @@ const goClick = ( hotItem : HotType ) => {
     border-radius: 5px;
     position: relative;
     &::after {
-      @include bg-after;
+      .bg-after();
     }
   }
 
@@ -200,7 +208,7 @@ const goClick = ( hotItem : HotType ) => {
     border-radius: 5px;
     position: relative;
     &::after {
-      @include bg-after;
+      .bg-after();
     }
     .weather_img {
       width: 100px;
@@ -240,13 +248,12 @@ const goClick = ( hotItem : HotType ) => {
     margin-top: 10px;
 
     .top {
-      // 小图标
-      ::v-deep() {
+       // 小图标
+      :deep(.van-dropdown-menu) {
         .van-dropdown-menu__bar {
           border-radius: 10px;
           box-shadow: none;
         }
-
         .van-dropdown-menu__title {
           &::after {
             display: none;
@@ -290,19 +297,20 @@ const goClick = ( hotItem : HotType ) => {
     }
 
     //单元格
-    ::v-deep(){
-      .van-cell-group{
-        border-radius: 10px;
+    :deep(.van-cell-group) {
+      border-radius: 10px;
+    }
+    
+    :deep(.van-cell) {
+      padding-left: 10px;
+      padding-right: 10px;
+      
+      &:first-of-type {
+        border-radius: 10px 10px 0 0;
       }
-      .van-cell{
-        padding-left: 10px;
-        padding-right: 10px;
-        &:first-of-type{
-          border-radius: 10px 10px 0 0;
-        }
-        &:last-of-type{
-          border-radius: 0 0 10px 10px;
-        }
+      
+      &:last-of-type {
+        border-radius: 0 0 10px 10px;
       }
     }
     //单元格标题

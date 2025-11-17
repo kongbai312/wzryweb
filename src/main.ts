@@ -7,8 +7,8 @@ import pinia from '@/stores/index';
 import 'normalize.css';
 
 //主题样式
-import '@/styles/index.scss';
-import '@/styles/dark.scss';
+import '@/styles/index.less';
+import '@/styles/dark.less';
 
 // Toast
 import 'vant/es/toast/style';        

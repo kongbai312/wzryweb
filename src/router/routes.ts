@@ -53,7 +53,7 @@ export default [
     // 随机数
     {
         path:'/random',
-        component: () => import('@/views/ToolPage/randomNum.vue'),
+        component: () => import('@/views/ToolPage/randomNum/index.vue'),
         meta:{
             title:'随机数'
         }
@@ -69,7 +69,7 @@ export default [
     //抖音工具箱
     {
         path:'/dytool',
-        component: () => import('@/views/ToolPage/dytool.vue'),
+        component: () => import('@/views/ToolPage/dytool/index.vue'),
         meta:{
             title:'抖音工具'
         }
@@ -88,6 +88,22 @@ export default [
         component: () => import('@/views/ToolPage/gsApp/gsDetail.vue'),
         meta:{
             title:'个税详情'
+        }
+    },
+    //贴吧工具箱
+    {
+        path:'/tbTool',
+        component: () => import('@/views/ToolPage/tbTool/index.vue'),
+        meta:{
+            title:'贴吧工具箱'
+        }
+    },
+    // 贴吧工具箱-查发言新
+    {
+        path:'/tbTool-cfy-new',
+        component: () => import('@/views/ToolPage/tbTool/modules/cfy-new.vue'),
+        meta:{
+            title:'贴吧工具箱'
         }
     },
 ]

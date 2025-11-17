@@ -45,6 +45,13 @@ export default ({ mode }: { mode: string }) => {
       }
     },
     server: {
+      proxy: {
+        [`/tbapi`]: {
+          target: 'https://tb.anova.me',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(new RegExp(`^/tbapi`), '')
+        },
+      },
       open: true,
       port: 8080
     },
@@ -61,6 +68,6 @@ export default ({ mode }: { mode: string }) => {
           drop_debugger: true
         }
       }
-    }
+    },
   })
 }

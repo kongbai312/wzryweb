@@ -97,8 +97,8 @@ let onShowShare = ( boolean : boolean) => {
 
 </script>
 
-<style lang="scss" scoped>
-@import '../../styles/mixins.scss';
+<style lang="less" scoped>
+@import '../../styles/mixins.less';
 .setting_container {
   box-sizing: border-box;
   height: calc(100vh - 50px);
@@ -130,7 +130,7 @@ let onShowShare = ( boolean : boolean) => {
     position: relative;
     &::after{
       border-radius: 30px;
-      @include bg-after;
+      .bg-after();
     }
   }
   .cell {
@@ -150,7 +150,7 @@ let onShowShare = ( boolean : boolean) => {
   justify-content: center;
   &::after{
     border-radius: 16px;
-    @include bg-after;
+    .bg-after();
   }
 }
 </style>

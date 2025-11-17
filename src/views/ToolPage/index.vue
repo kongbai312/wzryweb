@@ -20,6 +20,7 @@
 
 <script setup lang='ts'>
 import { useRouter } from 'vue-router';
+import { showFailToast } from 'vant';
 
 // 工具箱列表
 const toolsList = [
@@ -33,7 +34,7 @@ const toolsList = [
         iconColor: '#F6648C',
         title: '贴吧工具箱',
         describe: '贴吧用户搜索，贴吧关注',
-        route:''
+        route:'tbTool'
       },
       {
         iconName: 'point-gift',
@@ -61,7 +62,8 @@ const toolsList = [
         iconColor: '#F6648C',
         title: '个税',
         describe: '计算个人所得税务',
-        route:'gsdetail'
+        // route:'gsdetail'
+        route : ''
       },
     ]
   }
@@ -71,19 +73,22 @@ const toolsList = [
 const router = useRouter()
 //跳转到工具
 const goRoute = ( route : string ) => {
-  console.log(route)
+  if(!route){
+    showFailToast('当前功能已被禁用')
+    return
+  }
   router.push(route)
 }
 </script>
 
-<style lang="scss" scoped>
-@import '../../styles/mixins.scss';
+<style lang="less" scoped>
+@import '../../styles/mixins.less';
 
 .tool_container {
   box-sizing: border-box;
   padding: 0 15px 20px 15px;
   &::after {
-    @include bg-after;
+    .bg-after();
     z-index: -1;
   }
 

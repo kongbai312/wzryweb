@@ -1,0 +1,38 @@
+.van-theme-dark{
+    //整体色
+    --wzry-bgc:#001119;
+    --wzry-title-color: #fff;
+    --wzry-text-color: #9aa9b2;
+
+    // 轮播图背景色
+    --wzry-search-swipe-bgc: #0e232d;
+
+    //after背景颜色
+    --wzry-after-bgc: rgb(127,127,127,.3);
+
+    //设置里面的盒子阴影
+    --wzry-box-shadow :1px 1px 1px rgba(255, 255, 255, 0.2);
+    //设置里面头部背景
+    --wzry-setting-top-bgc: rgb(72, 72, 73,0.8);
+
+    //英雄详情页的背景色
+    --wzry-battle-bgc: linear-gradient(45deg, #424242, #6463638a);
+    //详情页的表单背景色
+    --wzry-battle-item-bgc:#5a585888;
+    //详情页的表单背景色
+    --wzry-battle-item-header-bgc:#7c7474;
+}
+
+//修改vant的cell的黑暗主题
+:root.van-theme-dark{
+    --van-cell-background: #2d2d2e;
+    --van-nav-bar-text-color: #fff;
+    --van-nav-bar-icon-color: #fff;
+}
+
+.van-theme-dark{
+    body{
+        color: #f5f5f5;
+        background-color: var(--wzry-bgc);
+    }
+}
