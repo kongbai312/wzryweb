@@ -1,0 +1,1 @@
+import{s as o,a as e,b as m}from"./function-call-B8IDtOCi.js";import"./index-Ba7smD2Q.js";const i={success:(s,a)=>{m({message:s,position:a})},info:(s,a)=>{e({message:s,position:a})},fail:(s,a)=>{o({message:s,position:a})}};export{i as m};

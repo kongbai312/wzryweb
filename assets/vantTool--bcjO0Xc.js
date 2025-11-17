@@ -1,1 +1,0 @@
-import{s as e,a as o,b as m}from"./index-0yHTpUBq.js";const c={success:(s,a)=>{m({message:s,position:a})},info:(s,a)=>{o({message:s,position:a})},fail:(s,a)=>{e({message:s,position:a})}};export{c as m};
