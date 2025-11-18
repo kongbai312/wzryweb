@@ -26,6 +26,6 @@ export const getReplyListApi = (params : {
         // url : baseUrlTb + '/getPostsNew',
         url : `https://api.allorigins.win/raw?url=${encodeURIComponent(baseUrlTb + `/getPostsNew?page=${params.page}&username=${params.username}&fname=${params.fname}`)}`,
         method:'get',
-        params,
+        // params,
     })
 }

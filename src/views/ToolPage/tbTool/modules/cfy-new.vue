@@ -125,6 +125,9 @@ const handleSearch = async() => {
     }
     userData.value = useDataOld.value
   } catch (error) {
+    if(params.value.page > 1){
+        params.value.page--;
+    }
     showFailToast('查询失败，请联系管理')
   } finally {
     loading.value = false
