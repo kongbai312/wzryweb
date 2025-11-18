@@ -6,7 +6,7 @@
         <span class="title">{{ tools.title }}</span>
       </div>
       <div class="tools">
-        <div class="toolItem" v-for="(tool, index) in tools.tools" :key="index" @click="goRoute(tool.route)">
+        <div class="toolItem" v-for="(tool, index) in tools.tools" :key="index" @click="goRoute(tool.route as any)">
           <van-icon :name="tool.iconName" :color="tool.iconColor" />
           <div class="toolItem_right">
             <span class="title">{{ tool.title }}</span>
@@ -55,7 +55,7 @@ const toolsList = [
         iconColor: '#F6648C',
         title: '抖音工具箱',
         describe: '搜索抖音历史发言，实名认证',
-        route:'dytool'
+        // route:'dytool'
       },
       {
         iconName: 'gold-coin',
