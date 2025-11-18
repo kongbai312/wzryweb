@@ -1,8 +1,8 @@
 import request from "@/utils/request";
 import type { ReplyType } from "@/types/tbTool.d.ts"
 //获取贴吧数据的基础url
-// const baseUrlTb = 'https://tb.anova.me'
-const baseUrlTb = '/tbapi'
+const baseUrlTb = import.meta.env.MODE === 'development' ? '/tbapi' :'https://tb.anova.me'
+// const baseUrlTb = '/tbapi'
 
 //请求返回类型
 type Data<T> = {

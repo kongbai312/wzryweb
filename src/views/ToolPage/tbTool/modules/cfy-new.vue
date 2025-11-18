@@ -12,8 +12,8 @@
         </div>
         <div class="content">
             <div class="user_container">
-                <van-image round class="user_img" :src="useData.user?.avatar" alt=""></van-image>
-                <div class="user_name">{{ useData.user?.nickname || '用户名' }}</div>
+                <van-image round class="user_img" :src="userData.user?.avatar" alt=""></van-image>
+                <div class="user_name">{{ userData.user?.nickname || '用户名' }}</div>
             </div>
             
             <div class="chatList">
@@ -21,11 +21,11 @@
                     <van-loading size="24px" vertical>加载中...</van-loading>
                 </div>
                 <!-- 无数据状态 -->
-                <div v-else-if="!loading && useData.posts?.length === 0" class="empty-or-loading-container">
+                <div v-else-if="!loading && userData.posts?.length === 0" class="empty-or-loading-container">
                     <van-empty description="暂无数据" />
                 </div>
                 <van-list v-else>
-                    <van-cell v-for="(item , index) in useData.posts" :key="index" :title="formatTitle(item.title)">
+                    <van-cell v-for="(item , index) in userData.posts" :key="index" :title="formatTitle(item.title)">
                         <template #title>
                           <div class="content_title">
                             <span class="titleText">标题：</span>
@@ -63,7 +63,7 @@ const { state: params, resetState } = useRestRef({
 });
 
 // 搜索
-const { state: useData, execute } = useAsyncState(
+const { state: useDataOld, execute } = useAsyncState(
     () => {
         const { page, username, fname } = params.value;
         return getReplyListApi({
@@ -82,6 +82,19 @@ const { state: useData, execute } = useAsyncState(
     }
 );
 
+// 当前搜索的用户名（用于判断是否为同一用户）
+const currentSearchUser = ref('')
+
+// 当前用户数据
+let userData = ref<any>({
+    user:{
+        nickname: '',
+        avatar: ''
+    },
+    posts: []
+})
+
+
 // 是否正在加载
 let loading = ref(false);
 
@@ -97,16 +110,24 @@ const handleSearch = async() => {
   }
   try {
     loading.value = true
+
     let res = await execute();
-    if(!res.msg.includes('Success')){
+    if(!res.msg.includes('Success') && params.value.page > 1){
         showFailToast(res.msg)
-        // 并且请求回上页的数据
-        handlePrevPage()
+        // 如果是同一用户
+        if(currentSearchUser.value === params.value.username){
+            params.value.page--;
+            return 
+        }
+        // // 并且请求回上页的数据
+        // handlePrevPage()
     }
+    userData.value = useDataOld.value
   } catch (error) {
-    
+    showFailToast('查询失败')
   } finally {
     loading.value = false
+    currentSearchUser.value = params.value.username
   }
 };
 
