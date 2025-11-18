@@ -57,7 +57,8 @@ import { useRestRef } from 'mmjs-core/hooks/vue.ref';
 
 // 多个免费代理服务器
 const corsProxies = [
-  'https://corsproxy.io/?', 
+  'https://corsproxy.io/?',  // 电脑端可以用 移动端好像不行
+  'https://api.codetabs.com/v1/proxy?quest=',
   'https://thingproxy.freeboard.io/fetch/', 
   'https://api.allorigins.win/raw?url=', 
   'https://proxy.cors.sh/?'
@@ -79,7 +80,7 @@ const { state: useDataOld, execute } = useAsyncState(
             page,
             username,
             fname,
-            baseProxy : corsProxies[0]  // 使用了代理服务
+            baseProxy : corsProxies[1]  // 使用了代理服务
         })
     },
     {
@@ -140,7 +141,7 @@ const handleSearch = async() => {
     if(params.value.page > 1){
         params.value.page--;
     }
-    showFailToast('代理服务器不稳定，请重试')
+    showFailToast('代理服务器不稳定，请重试,当前代理: ' + corsProxies[1])
   } finally {
     loading.value = false
     currentSearchUser.value = params.value.username
