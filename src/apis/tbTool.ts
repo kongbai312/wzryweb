@@ -1,7 +1,8 @@
 import request from "@/utils/request";
 import type { ReplyType } from "@/types/tbTool.d.ts"
 //获取贴吧数据的基础url
-const baseUrlTb = import.meta.env.MODE === 'development' ? '/tbapi' :'https://tb.anova.me'
+// const baseUrlTb = import.meta.env.MODE === 'development' ? '/tbapi' :'https://tb.anova.me'
+const baseUrlTb = 'https://tb.anova.me'
 // const baseUrlTb = '/tbapi'
 
 //请求返回类型
@@ -15,15 +16,16 @@ type Data<T> = {
     }
 }
 
-//获取英雄列表
+//获取回复列表 用的是代理服务器
 export const getReplyListApi = (params : {
     page : number,
     username : string,
     fname? : string
 }) => {
     return request<any,Data<ReplyType[]>>({
-        url : baseUrlTb + '/getPostsNew',
+        // url : baseUrlTb + '/getPostsNew',
+        url : `https://api.allorigins.win/raw?url=${encodeURIComponent(baseUrlTb + `/getPostsNew?page=${params.page}&username=${params.username}&fname=${params.fname}`)}`,
         method:'get',
-        params
+        params,
     })
 }

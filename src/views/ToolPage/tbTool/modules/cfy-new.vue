@@ -112,19 +112,20 @@ const handleSearch = async() => {
     loading.value = true
 
     let res = await execute();
-    if(!res.msg.includes('Success') && params.value.page > 1){
+    if(!res.msg.includes('Success')){
         showFailToast(res.msg)
         // 如果是同一用户
-        if(currentSearchUser.value === params.value.username){
+        if(currentSearchUser.value === params.value.username && params.value.page > 1){
             params.value.page--;
             return 
         }
         // // 并且请求回上页的数据
         // handlePrevPage()
+        return 
     }
     userData.value = useDataOld.value
   } catch (error) {
-    showFailToast('查询失败')
+    showFailToast('查询失败，请联系管理')
   } finally {
     loading.value = false
     currentSearchUser.value = params.value.username
