@@ -1,1 +1,0 @@
-import{am as t,r as a}from"./index-aGPECSjT.js";const i=t("xx-hero",()=>{let e=a(""),o=a("");return{heroName:e,regionValue:o,setHeroName:r=>{e.value=r},setRegionValue:r=>{o.value=r},clearHeroAndRegion:()=>{e.value="",o.value=""}}},{persist:{key:"wzry-hero",paths:["heroName","regionValue"]}});export{i as u};
