@@ -1,1 +1,0 @@
-import{s as o,a as e,b as m}from"./function-call-DOIE706b.js";import"./index-CAALK5gD.js";const i={success:(s,a)=>{m({message:s,position:a})},info:(s,a)=>{e({message:s,position:a})},fail:(s,a)=>{o({message:s,position:a})}};export{i as m};

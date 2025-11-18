@@ -1,1 +1,0 @@
-import{ae as n}from"./index-survHpWT.js";const c={to:[String,Object],url:String,replace:Boolean};function a({to:e,url:o,replace:t,$router:r}){e&&r?r[t?"replace":"push"](e):o&&(t?location.replace(o):location.href=o)}function i(){const e=n().proxy;return()=>a(e)}export{c as a,a as r,i as u};
