@@ -52,17 +52,19 @@
 <script setup lang='ts'>
 import { getReplyListApi } from '@/apis/tbTool'
 import { useAsyncState } from '@vueuse/core';
-import { showSuccessToast, showFailToast, showConfirmDialog } from 'vant';
+import { showSuccessToast, showFailToast, showConfirmDialog, showToast } from 'vant';
 import { useRestRef } from 'mmjs-core/hooks/vue.ref';
 
 // 多个免费代理服务器
 const corsProxies = [
   'https://corsproxy.io/?',  // 电脑端可以用 移动端好像不行
-  'https://api.codetabs.com/v1/proxy?quest=',
-  'https://thingproxy.freeboard.io/fetch/', 
+  'https://api.codetabs.com/v1/proxy?quest=', // 不能用
+  'https://thingproxy.freeboard.io/fetch/',     // 不能用
   'https://api.allorigins.win/raw?url=', 
   'https://proxy.cors.sh/?'
 ]
+
+let currentCorsProxy = corsProxies[3]
 
 // 请求参数 resetState 用来重置参数
 const { state: params, resetState } = useRestRef({
@@ -80,7 +82,7 @@ const { state: useDataOld, execute } = useAsyncState(
             page,
             username,
             fname,
-            baseProxy : corsProxies[1]  // 使用了代理服务
+            baseProxy : currentCorsProxy  // 使用了代理服务
         })
     },
     {
@@ -141,7 +143,11 @@ const handleSearch = async() => {
     if(params.value.page > 1){
         params.value.page--;
     }
-    showFailToast('代理服务器不稳定，请重试,当前代理: ' + corsProxies[1])
+    showToast({
+        message: '代理服务器不稳定，请重试,当前代理: ' + currentCorsProxy,
+        wordBreak: 'break-word',
+    });
+    // showToast('代理服务器不稳定，请重试,当前代理: ' + currentCorsProxy)
   } finally {
     loading.value = false
     currentSearchUser.value = params.value.username
