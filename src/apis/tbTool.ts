@@ -21,11 +21,19 @@ export const getReplyListApi = (params : {
     page : number,
     username : string,
     fname? : string
+    baseProxy? : string
 }) => {
+    // 关键：解构时给每个属性设默认值（包括 baseProxy）
+    const {
+        page = 1,          // 默认第一页
+        username = '',     // 默认空用户名
+        fname = '',        // 默认空 fname（避免 URL 出现 undefined）
+        baseProxy = 'https://api.allorigins.win/raw?url=' // 默认代理
+    } = params;
     return request<any,Data<ReplyType[]>>({
         // url : baseUrlTb + '/getPostsNew',
-        url : `https://api.allorigins.win/raw?url=${encodeURIComponent(baseUrlTb + `/getPostsNew?page=${params.page}&username=${params.username}&fname=${params.fname}`)}`,
         method:'get',
         // params,
+        url : `${baseProxy}${encodeURIComponent(baseUrlTb + `/getPostsNew?page=${page}&username=${username}&fname=${fname}`)}`,
     })
 }

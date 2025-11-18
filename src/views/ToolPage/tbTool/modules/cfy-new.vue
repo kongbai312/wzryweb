@@ -27,7 +27,7 @@
                 <van-list v-else>
                     <van-cell v-for="(item , index) in userData.posts" :key="index" :title="formatTitle(item.title)">
                         <template #title>
-                          <div class="content_title">
+                          <div class="content_title" @click="goTbDetail(item.href , item.title)">
                             <span class="titleText">标题：</span>
                             {{ item.title }}
                           </div>
@@ -52,14 +52,23 @@
 <script setup lang='ts'>
 import { getReplyListApi } from '@/apis/tbTool'
 import { useAsyncState } from '@vueuse/core';
-import { showSuccessToast, showFailToast } from 'vant';
+import { showSuccessToast, showFailToast, showConfirmDialog } from 'vant';
 import { useRestRef } from 'mmjs-core/hooks/vue.ref';
+
+// 多个免费代理服务器
+const corsProxies = [
+  'https://corsproxy.io/?', 
+  'https://thingproxy.freeboard.io/fetch/', 
+  'https://api.allorigins.win/raw?url=', 
+  'https://proxy.cors.sh/?'
+]
 
 // 请求参数 resetState 用来重置参数
 const { state: params, resetState } = useRestRef({
     page: 1,
     username: '',
-    fname : undefined
+    fname : undefined,
+    // baseProxy : corsProxies[2]
 });
 
 // 搜索
@@ -69,7 +78,8 @@ const { state: useDataOld, execute } = useAsyncState(
         return getReplyListApi({
             page,
             username,
-            fname
+            fname,
+            baseProxy : corsProxies[0]  // 使用了代理服务
         })
     },
     {
@@ -78,7 +88,9 @@ const { state: useDataOld, execute } = useAsyncState(
     },
     {
         resetOnExecute: false,
-        immediate : false
+        immediate : false,
+         // 添加异常处理配置 
+        throwError: true
     }
 );
 
@@ -128,7 +140,7 @@ const handleSearch = async() => {
     if(params.value.page > 1){
         params.value.page--;
     }
-    showFailToast('查询失败，请联系管理')
+    showFailToast('代理服务器不稳定，请重试')
   } finally {
     loading.value = false
     currentSearchUser.value = params.value.username
@@ -145,6 +157,20 @@ const handlePrevPage = () => {
 const handleNextPage = () => {
   params.value.page++;
   handleSearch();
+};
+
+// 跳转帖子详情
+const goTbDetail = (url: string , title: string) => {
+    showConfirmDialog({
+        title: '是否要跳转到以下详情',
+        message: title,
+    })
+    .then(() => {
+        window.open(url, '_blank');
+    })
+    .catch(() => {
+        // on cancel
+    });
 };
 
 // 添加文字截取函数
